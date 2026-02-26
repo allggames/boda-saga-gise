@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Saga & Gise - Invitación</title>
+  <title>Boda Saga & Gise</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Montserrat:wght@300;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -13,17 +13,18 @@
       --boho-earth: #8D6E63;
     }
 
-    /* Efecto de desplazamiento por pantallas (Snap) */
+    * { box-sizing: border-box; }
+
     html, body {
       margin: 0; padding: 0;
-      scroll-snap-type: y mandatory;
+      background-color: var(--boho-sand);
+      font-family: 'Montserrat', sans-serif;
+      scroll-snap-type: y mandatory; /* Efecto de cartas que 'traban' al bajar */
       overflow-y: scroll;
       height: 100vh;
-      font-family: 'Montserrat', sans-serif;
-      background-color: var(--boho-sand);
     }
 
-    /* Fondo Fijo (Asegúrate de que la ruta sea correcta) */
+    /* Imagen de fondo fija que cambia opacidad */
     .bg-fixed {
       position: fixed;
       top: 0; left: 0;
@@ -32,7 +33,7 @@
       background-size: cover;
       background-position: center;
       z-index: -1;
-      opacity: 0.5; /* Opacidad para que se vea como el video */
+      opacity: 0.5;
       transition: opacity 0.8s ease;
     }
 
@@ -47,37 +48,32 @@
       position: relative;
     }
 
-    /* Carta estilo "Story" con bordes redondeados profundos */
-    .story-card {
+    /* Diseño de las cartas (Glassmorphism) */
+    .glass-card {
       background: rgba(255, 255, 255, 0.82);
       backdrop-filter: blur(12px);
-      padding: 50px 30px;
+      padding: 45px 25px;
       border-radius: 80px 80px 20px 20px;
       border: 1px solid rgba(255,255,255,0.5);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
       width: 100%;
       max-width: 360px;
       text-align: center;
       opacity: 0;
       transform: translateY(40px);
-      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    section.active .story-card {
+    section.active .glass-card {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* Anillos animados del video */
-    .rings-icon {
-      width: 70px;
-      margin-bottom: 20px;
-      animation: rotate3d 4s infinite linear;
-    }
-
-    @keyframes rotate3d {
-      from { transform: rotateY(0deg); }
-      to { transform: rotateY(360deg); }
+    /* Detalles Boho: Pampas (Plumas) */
+    .pampas-decor {
+      width: 120px;
+      margin-bottom: 10px;
+      opacity: 0.7;
     }
 
     h1 {
@@ -87,27 +83,29 @@
       margin: 10px 0;
     }
 
-    .details-box {
-      margin: 20px 0;
-      color: var(--boho-olive);
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: 0.8rem;
+    .rings-icon {
+      width: 65px;
+      margin-bottom: 20px;
+      animation: rotate 4s infinite linear;
     }
 
-    /* Acordeón interactivo */
+    @keyframes rotate {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
+
+    /* Acordeón de detalles */
     .accordion {
       background: white;
       border-radius: 20px;
-      margin: 10px 0;
+      margin: 12px 0;
       width: 100%;
       overflow: hidden;
       border: 1px solid var(--boho-gold);
     }
 
     .accordion-header {
-      padding: 15px;
+      padding: 16px;
       cursor: pointer;
       background: var(--boho-gold);
       color: white;
@@ -121,7 +119,6 @@
       padding: 0 20px;
       overflow: hidden;
       font-size: 0.85rem;
-      color: #555;
     }
 
     .btn {
@@ -131,14 +128,12 @@
       font-weight: bold; cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 1px;
-      transition: 0.3s;
     }
 
     .btn-olive { background: var(--boho-olive); color: white; }
     .btn-earth { background: var(--boho-earth); color: white; opacity: 0.9; }
 
-    /* Flecha que rebota */
-    .arrow-down {
+    .scroll-indicator {
       position: absolute; bottom: 30px;
       font-size: 1.8rem; color: var(--boho-gold);
       animation: bounce 2s infinite;
@@ -155,23 +150,23 @@
   <div class="bg-fixed" id="bg"></div>
 
   <section class="active">
-    <div class="story-card" style="opacity: 1; transform: none;">
-      <img src="assets/images/anillos.png" alt="Anillos" class="rings-icon">
-      <p style="letter-spacing: 5px; font-size: 0.7rem;">NUESTRA BODA</p>
+    <div class="glass-card" style="opacity: 1; transform: none;">
+      <p style="letter-spacing: 5px; font-size: 0.7rem; color: var(--boho-olive);">NUESTRA BODA</p>
       <h1>Saga & Gise</h1>
-      <div class="details-box" id="timer">FALTAN...</div>
+      <img src="assets/images/anillos.png" alt="Anillos" class="rings-icon">
+      <div id="countdown" style="font-weight: 600; color: var(--boho-earth); margin-bottom: 10px;">FALTAN...</div>
       <p>30 DE MAYO DE 2026</p>
     </div>
-    <div class="arrow-down">↓</div>
+    <div class="scroll-indicator">↓</div>
   </section>
 
   <section>
-    <div class="story-card">
+    <div class="glass-card">
       <div class="accordion">
         <div class="accordion-header" onclick="toggle('loc')">📍 UBICACIÓN</div>
         <div id="loc" class="accordion-content">
           <p><strong>Salón MALAGA</strong><br>Posadas, Misiones<br>17:00 hs</p>
-          <a href="https://maps.google.com" target="_blank" class="btn btn-olive" style="font-size: 0.7rem;">CÓMO LLEGAR</a>
+          <a href="https://maps.google.com" target="_blank" class="btn btn-olive" style="font-size: 0.7rem; text-decoration: none;">VER MAPA</a>
         </div>
       </div>
 
@@ -183,18 +178,18 @@
         </div>
       </div>
     </div>
-    <div class="arrow-down">↓</div>
+    <div class="scroll-indicator">↓</div>
   </section>
 
   <section>
-    <div class="story-card">
-      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem;">¿Vienes?</h3>
+    <div class="glass-card">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem;">¿Nos acompañas?</h3>
       <div id="form">
-        <input type="text" id="nombre" placeholder="Nombre completo" style="width:100%; padding:15px; margin-bottom:15px; border-radius:15px; border:1px solid var(--boho-gold); font-family: inherit;">
-        <button onclick="enviar('Sí')" class="btn btn-olive">CONFIRMO ASISTENCIA</button>
+        <input type="text" id="nombre" placeholder="Tu nombre completo" style="width:100%; padding:15px; margin-bottom:15px; border-radius:15px; border:1px solid var(--boho-gold); font-family: inherit;">
+        <button onclick="enviar('Sí')" class="btn btn-olive">SÍ, ASISTIRÉ</button>
         <button onclick="enviar('No')" class="btn btn-earth">NO PODRÉ IR</button>
       </div>
-      <p id="status" style="font-weight: bold; color: var(--boho-olive);"></p>
+      <p id="status" style="font-weight: bold; color: var(--boho-olive); margin-top: 15px;"></p>
       
       <div style="margin-top: 30px; font-size: 0.8rem; border-top: 1px solid #eee; padding-top: 20px; color: var(--boho-earth);">
         🎁 <strong>REGALOS:</strong> Se dispondrá de sobres para dejar efectivo en el salón.
@@ -212,12 +207,11 @@
       el.style.padding = isOpen ? '0 20px' : '20px';
     }
 
-    // Cuenta regresiva
     const weddingDate = new Date("May 30, 2026 17:00:00").getTime();
     setInterval(() => {
       const diff = weddingDate - new Date().getTime();
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      document.getElementById("timer").innerText = `FALTAN ${days} DÍAS`;
+      document.getElementById("countdown").innerText = `FALTAN ${days} DÍAS`;
     }, 1000);
 
     // Detección de scroll para efectos de video
@@ -228,7 +222,7 @@
         const rect = sec.getBoundingClientRect();
         if(rect.top >= 0 && rect.top < window.innerHeight / 2) {
           sec.classList.add('active');
-          // El fondo cambia de opacidad según la sección igual que en el video
+          // El fondo cambia de opacidad según la sección
           if(i === 1) bg.style.opacity = "0.2"; 
           else bg.style.opacity = "0.5";
         } else {
@@ -244,7 +238,7 @@
       document.getElementById('status').innerText = "Enviando respuesta... ✨";
       try {
         await fetch(API_URL, {method: 'POST', mode: 'no-cors', body: JSON.stringify({nombre: name, confirmacion: res})});
-        document.getElementById('status').innerText = "¡Gracias! Tu respuesta fue guardada.";
+        document.getElementById('status').innerText = "¡Gracias! Tu respuesta ha sido guardada.";
       } catch(e) { 
         document.getElementById('status').innerText = "Error, intenta de nuevo.";
         document.getElementById('form').style.display = 'block';
