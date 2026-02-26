@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda - Agos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Montserrat:wght@300&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --boho-beige: #F5EBE0;
+            --boho-terracotta: #D4A373;
+            --boho-olive: #606C38;
+            --boho-text: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--boho-beige);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--boho-text);
+        }
+
+        .card {
+            background: white;
+            max-width: 400px;
+            width: 90%;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 50px 50px 0 0; /* Forma de arco boho */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(212, 163, 115, 0.3);
+            position: relative;
+        }
+
+        /* Adorno floral simple con CSS */
+        .card::before {
+            content: '🌿';
+            font-size: 30px;
+            display: block;
+            margin-bottom: 10px;
+            opacity: 0.6;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.5rem;
+            color: var(--boho-terracotta);
+            margin: 10px 0;
+        }
+
+        .details {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            color: var(--boho-olive);
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--boho-terracotta);
+            width: 50%;
+            margin: 20px auto;
+            opacity: 0.4;
+        }
+
+        .btn {
+            display: block;
+            background-color: var(--boho-terracotta);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            margin: 15px 10px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3);
+        }
+
+        .btn-maps {
+            background-color: var(--boho-olive);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <p style="text-transform: uppercase; letter-spacing: 3px;">¡Nos Casamos!</p>
+        <h1>Agos & [Nombre]</h1>
+        
+        <div class="divider"></div>
+        
+        <div class="details">
+            24 . OCTUBRE . 2026<br>
+            17:00 HORAS
+        </div>
+
+        <p>Posadas, Misiones</p>
+        <p><i>"Hay momentos que solo son perfectos si los compartimos contigo."</i></p>
+
+        <a href="https://wa.me/TUNUMERO?text=¡Hola! Confirmo mi asistencia a la boda." class="btn">
+            CONFIRMAR ASISTENCIA
+        </a>
+
+        <a href="https://maps.app.goo.gl/TU-UBICACION" target="_blank" class="btn btn-maps">
+            VER UBICACIÓN
+        </a>
+
+        <footer>Te esperamos con mucho amor</footer>
+    </div>
+
+</body>
+</html>
