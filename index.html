@@ -13,32 +13,33 @@
       --boho-earth: #8D6E63;
     }
 
-    /* Efecto Snap Scroll tipo Historias */
+    /* Reset y Snap Scroll */
     html, body {
       margin: 0; padding: 0;
       scroll-snap-type: y mandatory;
       overflow-y: scroll;
       height: 100vh;
       font-family: 'Montserrat', sans-serif;
-      background-color: var(--boho-sand);
-      color: #333;
+      background-color: #000; /* Fondo base oscuro por si falla la imagen */
     }
 
-    /* Fondo Fijo que recupera tu imagen */
-    .bg-fixed {
+    /* LA IMAGEN EN EL FONDO (FIJA Y TOTAL) */
+    .background-fijo {
       position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-image: url('assets/images/portada-boho.jpg');
+      width: 100vw;
+      height: 100vh;
+      background-image: url('assets/images/portada-boho.jpg'); /* RUTA AL FONDO */
       background-size: cover;
       background-position: center;
-      z-index: -1;
-      opacity: 0.5;
-      transition: opacity 1s ease;
+      z-index: -1; /* Va detrás de todo */
+      opacity: 0.6; /* Opacidad estilo video */
+      transition: opacity 0.8s ease;
     }
 
     section {
       height: 100vh;
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -48,23 +49,23 @@
       position: relative;
     }
 
-    /* Carta estilo Story del video */
-    .glass-card {
+    /* Carta estilo Story que flota sobre el fondo */
+    .carta-story {
       background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
       padding: 40px 25px;
       border-radius: 60px 60px 20px 20px;
-      border: 1px solid rgba(255,255,255,0.5);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
       width: 100%;
       max-width: 350px;
       text-align: center;
       opacity: 0;
       transform: translateY(50px);
-      transition: all 0.8s ease-out;
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    section.active .glass-card {
+    section.active .carta-story {
       opacity: 1;
       transform: translateY(0);
     }
@@ -76,19 +77,19 @@
       margin: 10px 0;
     }
 
-    .rings-icon {
+    .anillos-gif {
       width: 70px;
       margin-bottom: 20px;
-      animation: rotate 4s infinite linear;
+      animation: girar 4s infinite linear;
     }
 
-    @keyframes rotate {
+    @keyframes girar {
       from { transform: rotateY(0deg); }
       to { transform: rotateY(360deg); }
     }
 
-    /* Acordeón para detalles */
-    .accordion {
+    /* Acordeón */
+    .acordeon {
       background: white;
       border-radius: 20px;
       margin: 10px 0;
@@ -97,15 +98,16 @@
       border: 1px solid var(--boho-gold);
     }
 
-    .accordion-header {
+    .acordeon-header {
       padding: 15px;
       cursor: pointer;
       background: var(--boho-gold);
       color: white;
       font-weight: bold;
+      font-size: 0.9rem;
     }
 
-    .accordion-content {
+    .acordeon-content {
       height: 0;
       transition: 0.4s;
       padding: 0 20px;
@@ -113,24 +115,26 @@
       font-size: 0.85rem;
     }
 
-    .btn {
+    .boton-boho {
       display: block; width: 100%;
-      padding: 15px; margin: 10px 0;
-      border-radius: 30px; border: none;
+      padding: 16px; margin: 10px 0;
+      border-radius: 35px; border: none;
       font-weight: bold; cursor: pointer;
       text-transform: uppercase;
+      letter-spacing: 1px;
+      color: white;
     }
 
-    .btn-olive { background: var(--boho-olive); color: white; }
-    .btn-earth { background: var(--boho-earth); color: white; opacity: 0.9; }
+    .verde { background: var(--boho-olive); }
+    .tierra { background: var(--boho-earth); }
 
-    .arrow {
+    .flecha {
       position: absolute; bottom: 30px;
-      font-size: 2rem; color: var(--boho-gold);
-      animation: bounce 2s infinite;
+      font-size: 2rem; color: #fff;
+      animation: saltar 2s infinite;
     }
 
-    @keyframes bounce {
+    @keyframes saltar {
       0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
       40% {transform: translateY(-15px);}
     }
@@ -138,97 +142,96 @@
 </head>
 <body>
 
-  <div class="bg-fixed" id="bg"></div>
+  <div class="background-fijo" id="bgBody"></div>
 
   <section class="active">
-    <div class="glass-card" style="opacity: 1; transform: none;">
-      <img src="assets/images/anillos.png" alt="Anillos" class="rings-icon">
-      <p style="letter-spacing: 5px; font-size: 0.7rem;">NUESTRA BODA</p>
+    <div class="carta-story" style="opacity: 1; transform: none;">
+      <p style="letter-spacing: 5px; font-size: 0.7rem; color: var(--boho-olive);">NUESTRA BODA</p>
       <h1>Saga & Gise</h1>
-      <div id="countdown" style="font-weight: 600; color: var(--boho-olive); margin: 15px 0;">FALTAN...</div>
+      <img src="assets/images/anillos.png" alt="Anillos" class="anillos-gif">
+      <div id="countdown" style="font-weight: 600; color: var(--boho-earth); margin-bottom: 10px;">FALTAN...</div>
       <p>30 DE MAYO DE 2026</p>
     </div>
-    <div class="arrow">↓</div>
+    <div class="flecha">↓</div>
   </section>
 
   <section>
-    <div class="glass-card">
-      <div class="accordion">
-        <div class="accordion-header" onclick="toggle('loc')">📍 UBICACIÓN</div>
-        <div id="loc" class="accordion-content">
+    <div class="carta-story">
+      <div class="acordeon">
+        <div class="acordeon-header" onclick="ver('loc')">📍 UBICACIÓN</div>
+        <div id="loc" class="acordeon-content">
           <p><strong>Salón MALAGA</strong><br>30/05/2026 - 17:00 hs</p>
-          <a href="https://maps.google.com" target="_blank" class="btn btn-olive" style="text-decoration:none; font-size: 0.7rem;">VER MAPA</a>
+          <a href="https://maps.google.com" target="_blank" class="boton-boho verde" style="text-decoration:none; font-size: 0.7rem;">CÓMO LLEGAR</a>
         </div>
       </div>
 
-      <div class="accordion">
-        <div class="accordion-header" onclick="toggle('dress')">👗 DRESS CODE</div>
-        <div id="dress" class="accordion-content">
+      <div class="acordeon">
+        <div class="acordeon-header" onclick="ver('dress')">👗 DRESS CODE</div>
+        <div id="dress" class="acordeon-content">
           <p>Colores Tierra</p>
-          <p style="color: #a94442; font-weight: bold; border: 1px dashed; padding: 8px; border-radius: 10px;">🚫 PROHIBIDO BLANCO Y NEGRO</p>
+          <p style="color: #a94442; font-weight: bold; border: 1px dashed; padding: 10px; border-radius: 10px;">🚫 PROHIBIDO BLANCO Y NEGRO</p>
         </div>
       </div>
     </div>
-    <div class="arrow">↓</div>
+    <div class="flecha">↓</div>
   </section>
 
   <section>
-    <div class="glass-card">
-      <h3 style="font-family: 'Playfair Display', serif;">¿Vienes?</h3>
-      <div id="form">
-        <input type="text" id="nombre" placeholder="Tu nombre y apellido" style="width:100%; padding:15px; margin-bottom:15px; border-radius:15px; border:1px solid var(--boho-gold); font-family: inherit;">
-        <button onclick="enviar('Sí')" class="btn btn-olive">SÍ, ASISTIRÉ</button>
-        <button onclick="enviar('No')" class="btn btn-earth">NO PODRÉ IR</button>
+    <div class="carta-story">
+      <h3>¿Vienes?</h3>
+      <div id="confirm-form">
+        <input type="text" id="nombreGuest" placeholder="Tu nombre completo" style="width:100%; padding:15px; margin-bottom:15px; border-radius:15px; border:1px solid var(--boho-gold);">
+        <button onclick="enviarSheet('Sí')" class="boton-boho verde">SÍ, ASISTIRÉ</button>
+        <button onclick="enviarSheet('No')" class="boton-boho tierra">NO PODRÉ IR</button>
       </div>
-      <p id="status" style="font-weight: bold; color: var(--boho-olive);"></p>
-      <div style="margin-top: 25px; font-size: 0.75rem; color: var(--boho-earth);">
-        🎁 <strong>Regalos:</strong> Habrá sobres para efectivo en el salón.
+      <p id="msgStatus" style="font-weight: bold; color: var(--boho-olive);"></p>
+      <div style="margin-top: 30px; font-size: 0.8rem; border-top: 1px solid #eee; padding-top: 20px;">
+        🎁 <strong>REGALOS:</strong> Sobres para efectivo en el salón.
       </div>
     </div>
   </section>
 
   <script>
-    const API = "https://script.google.com/macros/s/AKfycby-qS8YrjDUa2CB0a_k4mpbbV_8JFIIk8FqWn6df1rxM1pyWfywQi8p8miuUxOw61Ot/exec";
+    const GOOGLE_API = "https://script.google.com/macros/s/AKfycby-qS8YrjDUa2CB0a_k4mpbbV_8JFIIk8FqWn6df1rxM1pyWfywQi8p8miuUxOw61Ot/exec";
 
-    function toggle(id) {
+    function ver(id) {
       const el = document.getElementById(id);
-      const isOpen = el.style.height === '130px';
-      el.style.height = isOpen ? '0px' : '130px';
-      el.style.padding = isOpen ? '0 20px' : '20px';
+      const open = el.style.height === '130px';
+      el.style.height = open ? '0px' : '130px';
+      el.style.padding = open ? '0 20px' : '20px';
     }
 
-    const wedding = new Date("May 30, 2026 17:00:00").getTime();
+    const fin = new Date("May 30, 2026 17:00:00").getTime();
     setInterval(() => {
-      const days = Math.floor((wedding - new Date().getTime()) / (1000 * 60 * 60 * 24));
-      document.getElementById("countdown").innerText = `FALTAN ${days} DÍAS`;
+      const d = Math.floor((fin - new Date().getTime()) / (1000 * 60 * 60 * 24));
+      document.getElementById("countdown").innerText = `FALTAN ${d} DÍAS`;
     }, 1000);
 
-    const bg = document.getElementById('bg');
+    const bg = document.getElementById('bgBody');
     window.addEventListener('scroll', () => {
-      const sections = document.querySelectorAll('section');
-      sections.forEach((sec, i) => {
-        const rect = sec.getBoundingClientRect();
-        if(rect.top >= 0 && rect.top < window.innerHeight / 2) {
-          sec.classList.add('active');
-          if(i === 1) bg.style.opacity = "0.2"; 
-          else bg.style.opacity = "0.5";
+      const secs = document.querySelectorAll('section');
+      secs.forEach((s, i) => {
+        const top = s.getBoundingClientRect().top;
+        if(top >= 0 && top < window.innerHeight / 2) {
+          s.classList.add('active');
+          bg.style.opacity = (i === 1) ? "0.3" : "0.6"; /* Cambia fondo según sección */
         } else {
-          sec.classList.remove('active');
+          s.classList.remove('active');
         }
       });
     });
 
-    async function enviar(res) {
-      const name = document.getElementById('nombre').value;
-      if(!name) return alert("Dinos tu nombre");
-      document.getElementById('form').style.display = 'none';
-      document.getElementById('status').innerText = "Enviando... ✨";
+    async function enviarSheet(res) {
+      const n = document.getElementById('nombreGuest').value;
+      if(!n) return alert("Ingresa tu nombre");
+      document.getElementById('confirm-form').style.display = 'none';
+      document.getElementById('msgStatus').innerText = "Guardando... ✨";
       try {
-        await fetch(API, {method: 'POST', mode: 'no-cors', body: JSON.stringify({nombre: name, confirmacion: res})});
-        document.getElementById('status').innerText = "¡Gracias! Respuesta guardada.";
+        await fetch(GOOGLE_API, {method: 'POST', mode: 'no-cors', body: JSON.stringify({nombre: n, confirmacion: res})});
+        document.getElementById('msgStatus').innerText = "¡Gracias! Tu respuesta fue guardada.";
       } catch(e) { 
-        document.getElementById('status').innerText = "Error, intenta de nuevo.";
-        document.getElementById('form').style.display = 'block';
+        document.getElementById('msgStatus').innerText = "Error, intenta de nuevo.";
+        document.getElementById('confirm-form').style.display = 'block';
       }
     }
   </script>
