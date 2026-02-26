@@ -2,11 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boda Saga & Gise</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Saga & Gise - Invitación</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Montserrat:wght@300;500;600&display=swap" rel="stylesheet">
   <style>
-    /* DISEÑO PREMIUM CORREGIDO */
     :root {
       --boho-gold: #D4A373;
       --boho-olive: #6B705C;
@@ -14,64 +13,84 @@
       --boho-earth: #8D6E63;
     }
 
-    body {
+    * { box-sizing: border-box; }
+
+    html, body {
       margin: 0;
+      padding: 0;
       background-color: var(--boho-sand);
       font-family: 'Montserrat', sans-serif;
-      color: #333;
+      /* Efecto Snap Scroll */
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
     }
 
-    /* Imagen de Fondo */
-    .bg-image {
+    /* Fondo fijo que cambia de intensidad o color */
+    .bg-container {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       background-image: url('assets/images/portada-boho.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.4;
       z-index: -1;
+      transition: opacity 0.8s ease;
     }
 
     section {
-      min-height: 100vh;
+      height: 100vh;
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 40px 20px;
-      text-align: center;
+      padding: 20px;
+      scroll-snap-align: start; /* Ajusta la sección a la pantalla */
+      position: relative;
+    }
+
+    /* Estilo de las Cartas */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 40px 25px;
+      border-radius: 60px 60px 20px 20px;
+      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 350px; /* Tamaño ideal celular */
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.8s ease;
+    }
+
+    /* Animación cuando la carta entra en pantalla */
+    section.active .glass-card {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     .rings-icon {
-      width: 80px;
+      width: 70px; /* Tamaño controlado */
+      height: auto;
       margin-bottom: 20px;
       animation: float 3s infinite ease-in-out;
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3rem;
+      font-size: 2.8rem;
       color: var(--boho-earth);
       margin: 10px 0;
-    }
-
-    .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(10px);
-      padding: 40px 25px;
-      border-radius: 50px 50px 20px 20px;
-      border: 1px solid white;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 380px;
     }
 
     .accordion {
       background: white;
       border: 1px solid var(--boho-gold);
-      border-radius: 15px;
+      border-radius: 20px;
       margin: 10px 0;
+      width: 100%;
       overflow: hidden;
     }
 
@@ -80,7 +99,8 @@
       cursor: pointer;
       background: var(--boho-gold);
       color: white;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 0.9rem;
     }
 
     .accordion-content {
@@ -88,103 +108,147 @@
       transition: 0.3s;
       padding: 0 15px;
       overflow: hidden;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .btn {
       display: block; width: 100%;
-      padding: 15px; margin: 10px 0;
+      padding: 16px; margin: 10px 0;
       border-radius: 30px; border: none;
       font-weight: bold; cursor: pointer;
       text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .btn-main { background: var(--boho-olive); color: white; }
     .btn-sec { background: var(--boho-earth); color: white; opacity: 0.9; }
 
-    .dress-tag {
-      color: #a94442; font-weight: bold;
-      border: 1px solid #a94442;
-      padding: 5px; border-radius: 5px;
-      font-size: 0.8rem;
-    }
-
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .indicator {
+      position: absolute;
+      bottom: 20px;
+      font-size: 1.5rem;
+      animation: bounce 2s infinite;
+      color: var(--boho-gold);
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+      40% {transform: translateY(-10px);}
+      60% {transform: translateY(-5px);}
     }
   </style>
 </head>
 <body>
 
-  <div class="bg-image"></div>
+  <div class="bg-container" id="bg"></div>
 
-  <section>
+  <section class="active" id="sec1">
     <img src="assets/images/anillos.png" alt="Anillos" class="rings-icon">
-    <p style="letter-spacing: 4px;">NUESTRA BODA</p>
+    <p style="letter-spacing: 4px; font-size: 0.7rem;">NUESTRA BODA</p>
     <h1>Saga & Gise</h1>
-    <div id="countdown" style="font-weight: 600; color: var(--boho-olive);">Cargando...</div>
-    <p>30 de Mayo de 2026</p>
-    <p style="font-size: 2rem; animation: float 2s infinite;">↓</p>
+    <div id="countdown" style="font-weight: 600; color: var(--boho-olive); margin: 15px 0;">Cargando...</div>
+    <p style="font-size: 0.9rem;">30 de Mayo de 2026</p>
+    <div class="indicator">↓</div>
   </section>
 
-  <section>
+  <section id="sec2">
     <div class="glass-card">
       <div class="accordion">
         <div class="accordion-header" onclick="toggle('loc')">📍 UBICACIÓN</div>
         <div id="loc" class="accordion-content">
           <p><strong>Salón MALAGA</strong><br>Posadas, Misiones<br>17:00 hs</p>
-          <a href="https://maps.google.com" target="_blank" style="color:var(--boho-olive)">VER MAPA</a>
+          <a href="https://www.google.com/maps" target="_blank" style="color:var(--boho-olive); font-weight: bold;">VER MAPA</a>
         </div>
       </div>
 
       <div class="accordion">
-        <div class="accordion-header" onclick="toggle('dress')">👗 DRESS CODE</div>
+        <div class="accordion-header" onclick="toggle('dress')">👗 CÓDIGO DE VESTIMENTA</div>
         <div id="dress" class="accordion-content">
           <p>Colores Tierra</p>
-          <span class="dress-tag">🚫 PROHIBIDO BLANCO Y NEGRO</span>
+          <p style="color: #a94442; font-weight: bold; border: 1px solid; padding: 5px; border-radius: 5px;">🚫 PROHIBIDO BLANCO Y NEGRO</p>
         </div>
       </div>
     </div>
+    <div class="indicator">↓</div>
   </section>
 
-  <section>
+  <section id="sec3">
     <div class="glass-card">
-      <h3>¿Vienes?</h3>
+      <h3 style="font-family: 'Playfair Display', serif;">¿Nos acompañas?</h3>
       <div id="form">
-        <input type="text" id="guest-name" placeholder="Tu nombre" style="width:100%; padding:12px; margin-bottom:10px; border-radius:10px; border:1px solid var(--boho-gold);">
+        <input type="text" id="guest-name" placeholder="Tu nombre y apellido" style="width:100%; padding:15px; margin-bottom:15px; border-radius:15px; border:1px solid var(--boho-gold); font-family: inherit;">
         <button onclick="enviar('Sí')" class="btn btn-main">SÍ, ASISTIRÉ</button>
         <button onclick="enviar('No')" class="btn btn-sec">NO PODRÉ IR</button>
       </div>
-      <p id="status"></p>
+      <p id="status" style="font-weight: bold; color: var(--boho-olive);"></p>
+      
+      <div style="margin-top: 20px; font-size: 0.75rem; color: var(--boho-earth);">
+        🎁 <strong>Regalos:</strong> Habrá sobres para efectivo en el salón.
+      </div>
     </div>
   </section>
 
   <script>
+    // URL de tu Script
     const API = "https://script.google.com/macros/s/AKfycby-qS8YrjDUa2CB0a_k4mpbbV_8JFIIk8FqWn6df1rxM1pyWfywQi8p8miuUxOw61Ot/exec";
 
+    // Lógica de Acordeón
     function toggle(id) {
       const el = document.getElementById(id);
-      el.style.height = (el.style.height === '0px' || el.style.height === '') ? '100px' : '0px';
-      el.style.padding = (el.style.height === '100px') ? '10px 15px' : '0 15px';
+      const isOpen = el.style.height === '100px';
+      el.style.height = isOpen ? '0px' : '100px';
+      el.style.padding = isOpen ? '0 15px' : '15px';
     }
 
+    // Cuenta Regresiva
     const wedding = new Date("May 30, 2026 17:00:00").getTime();
     setInterval(() => {
       const diff = wedding - new Date().getTime();
-      document.getElementById("countdown").innerText = `FALTAN ${Math.floor(diff/(1000*60*60*24))} DÍAS`;
+      const days = Math.floor(diff/(1000*60*60*24));
+      document.getElementById("countdown").innerText = `FALTAN ${days} DÍAS`;
     }, 1000);
 
+    // Detección de Scroll para efectos
+    const sections = document.querySelectorAll('section');
+    const bg = document.getElementById('bg');
+
+    window.addEventListener('scroll', () => {
+      sections.forEach((section, index) => {
+        const top = section.getBoundingClientRect().top;
+        if (top >= 0 && top < window.innerHeight / 2) {
+          section.classList.add('active');
+          // Cambiamos la opacidad del fondo según la sección
+          if(index === 0) bg.style.opacity = "0.4";
+          if(index === 1) bg.style.opacity = "0.2";
+          if(index === 2) bg.style.opacity = "0.5";
+        } else {
+          section.classList.remove('active');
+        }
+      });
+    });
+
+    // Envío de Datos
     async function enviar(res) {
       const name = document.getElementById('guest-name').value;
-      if(!name) return alert("Poné tu nombre");
+      if(!name) return alert("Por favor, ingresa tu nombre");
+      
       document.getElementById('form').style.display = 'none';
-      document.getElementById('status').innerText = "Enviando...";
+      document.getElementById('status').innerText = "Enviando respuesta... ✨";
+
       try {
-        await fetch(API, { method: 'POST', mode: 'no-cors', body: JSON.stringify({nombre: name, confirmacion: res}) });
-        document.getElementById('status').innerText = "¡Gracias! Respuesta guardada.";
+        await fetch(API, { 
+          method: 'POST', 
+          mode: 'no-cors', 
+          body: JSON.stringify({nombre: name, confirmacion: res}) 
+        });
+        document.getElementById('status').innerText = "¡Gracias! Tu respuesta fue guardada.";
       } catch(e) { 
-        document.getElementById('status').innerText = "Error, intentá de nuevo.";
+        document.getElementById('status').innerText = "Error al enviar. Intenta de nuevo.";
         document.getElementById('form').style.display = 'block';
       }
     }
