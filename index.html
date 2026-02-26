@@ -1,128 +1,143 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestra Boda - Agos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Montserrat:wght@300&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --boho-beige: #F5EBE0;
-            --boho-terracotta: #D4A373;
-            --boho-olive: #606C38;
-            --boho-text: #4A4A4A;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boda Saga & Gise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --boho: #D4A373; --olive: #6B705C; --sand: #F5EBE0; --earth: #8D6E63; }
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    body { margin: 0; background-color: var(--sand); font-family: 'Montserrat', sans-serif; color: #4A4A4A; overflow-x: hidden; }
 
-        body {
-            background-color: var(--boho-beige);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Montserrat', sans-serif;
-            color: var(--boho-text);
-        }
+    /* Animación de Anillos */
+    .rings-container { margin: 20px 0; display: flex; justify-content: center; }
+    .ring {
+      width: 40px; height: 40px; border: 4px solid var(--boho);
+      border-radius: 50%; margin: 0 -10px; opacity: 0.8;
+      animation: rotate 3s infinite linear;
+    }
+    @keyframes rotate { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
 
-        .card {
-            background: white;
-            max-width: 400px;
-            width: 90%;
-            padding: 40px 20px;
-            text-align: center;
-            border-radius: 50px 50px 0 0; /* Forma de arco boho */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid rgba(212, 163, 115, 0.3);
-            position: relative;
-        }
+    section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px 20px; text-align: center; }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 40px 20px;
+      border-radius: 60px 60px 20px 20px;
+      border: 1px solid white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      width: 100%; max-width: 380px;
+    }
 
-        /* Adorno floral simple con CSS */
-        .card::before {
-            content: '🌿';
-            font-size: 30px;
-            display: block;
-            margin-bottom: 10px;
-            opacity: 0.6;
-        }
+    h1 { font-family: 'Playfair Display', serif; color: var(--earth); font-size: 3rem; margin: 10px 0; }
+    .countdown-box { background: var(--olive); color: white; padding: 15px; border-radius: 10px; font-weight: bold; margin: 20px 0; }
 
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 2.5rem;
-            color: var(--boho-terracotta);
-            margin: 10px 0;
-        }
+    /* Acordeón */
+    .accordion { background-color: white; border: 1px solid var(--boho); border-radius: 15px; margin: 10px 0; width: 100%; overflow: hidden; }
+    .accordion-header { padding: 15px; cursor: pointer; background: var(--boho); color: white; font-weight: bold; }
+    .accordion-content { padding: 0; height: 0; transition: 0.3s ease; font-size: 0.9rem; overflow: hidden; }
 
-        .details {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            margin: 20px 0;
-            color: var(--boho-olive);
-        }
-
-        .divider {
-            height: 1px;
-            background: var(--boho-terracotta);
-            width: 50%;
-            margin: 20px auto;
-            opacity: 0.4;
-        }
-
-        .btn {
-            display: block;
-            background-color: var(--boho-terracotta);
-            color: white;
-            text-decoration: none;
-            padding: 15px;
-            margin: 15px 10px;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: transform 0.3s;
-            box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3);
-        }
-
-        .btn-maps {
-            background-color: var(--boho-olive);
-        }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
-
-        footer {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            font-style: italic;
-        }
-    </style>
+    .btn { 
+      display: block; width: 90%; padding: 15px; margin: 10px auto; 
+      border-radius: 30px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s;
+    }
+    .btn-main { background: var(--olive); color: white; }
+    .btn-sec { background: var(--earth); color: white; opacity: 0.8; }
+    
+    .dress-code-tag { color: #a94442; font-weight: bold; border: 1px solid #a94442; padding: 5px; display: inline-block; margin-top: 5px; border-radius: 5px; }
+  </style>
 </head>
 <body>
 
-    <div class="card">
-        <p style="text-transform: uppercase; letter-spacing: 3px;">¡Nos Casamos!</p>
-        <h1>Agos & [Nombre]</h1>
-        
-        <div class="divider"></div>
-        
-        <div class="details">
-            24 . OCTUBRE . 2026<br>
-            17:00 HORAS
-        </div>
-
-        <p>Posadas, Misiones</p>
-        <p><i>"Hay momentos que solo son perfectos si los compartimos contigo."</i></p>
-
-        <a href="https://wa.me/TUNUMERO?text=¡Hola! Confirmo mi asistencia a la boda." class="btn">
-            CONFIRMAR ASISTENCIA
-        </a>
-
-        <a href="https://maps.app.goo.gl/TU-UBICACION" target="_blank" class="btn btn-maps">
-            VER UBICACIÓN
-        </a>
-
-        <footer>Te esperamos con mucho amor</footer>
+  <section>
+    <div class="rings-container">
+      <div class="ring"></div>
+      <div class="ring" style="animation-delay: 1.5s;"></div>
     </div>
+    <p style="letter-spacing: 3px;">NUESTRA BODA</p>
+    <h1>Saga & Gise</h1>
+    <div class="countdown-box" id="timer">FALTAN...</div>
+    <p>30 de Mayo de 2026</p>
+  </section>
 
+  <section>
+    <div class="glass-card">
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggle('loc')">📍 DONDE & CUANDO</div>
+        <div id="loc" class="accordion-content">
+          <p><strong>Salón MALAGA</strong><br>30/05/2026 - 17:00hs</p>
+          <a href="https://maps.google.com" target="_blank" style="color:var(--olive)">Ver mapa</a>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggle('dress')">👗 DRESS CODE</div>
+        <div id="dress" class="accordion-content">
+          <p>Colores Tierra</p>
+          <span class="dress-code-tag">PROHIBIDO BLANCO Y NEGRO</span>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggle('regalo')">🎁 REGALOS</div>
+        <div id="regalo" class="accordion-content">
+          <p>Dispondremos de sobres para dejar efectivo en el salón.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass-card">
+      <h3>¿Vienes?</h3>
+      <div id="form">
+        <input type="text" id="nombre" placeholder="Nombre completo" style="width:90%; padding:12px; margin-bottom:10px; border-radius:5px; border:1px solid var(--boho);">
+        <button onclick="confirmar('Sí')" class="btn btn-main">CONFIRMO ASISTENCIA</button>
+        <button onclick="confirmar('No')" class="btn btn-sec">NO PUEDO IR</button>
+      </div>
+      <h4 id="status"></h4>
+    </div>
+  </section>
+
+  <script>
+    // REEMPLAZA ESTA URL CON LA DE TU APPS SCRIPT
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby-qS8YrjDUa2CB0a_k4mpbbV_8JFIIk8FqWn6df1rxM1pyWfywQi8p8miuUxOw61Ot/exec";
+
+    function toggle(id) {
+      const el = document.getElementById(id);
+      el.style.height = (el.style.height === '0px' || el.style.height === '') ? '90px' : '0px';
+      el.style.padding = (el.style.height === '90px') ? '15px' : '0';
+    }
+
+    async function confirmar(opcion) {
+      const nombre = document.getElementById('nombre').value;
+      if(!nombre) return alert("Dinos tu nombre");
+      
+      document.getElementById('form').style.display = 'none';
+      document.getElementById('status').innerText = "Guardando respuesta...";
+
+      try {
+        await fetch(WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors', // Necesario para evitar bloqueos de seguridad básicos
+          body: JSON.stringify({nombre: nombre, confirmacion: opcion}),
+          headers: {'Content-Type': 'application/json'}
+        });
+        document.getElementById('status').innerText = "✨ ¡Gracias! Respuesta enviada.";
+      } catch (e) {
+        document.getElementById('status').innerText = "Hubo un error, intenta de nuevo.";
+        document.getElementById('form').style.display = 'block';
+      }
+    }
+
+    // Timer
+    const event = new Date("May 30, 2026 17:00:00").getTime();
+    setInterval(() => {
+      const diff = event - new Date().getTime();
+      document.getElementById("timer").innerText = `FALTAN ${Math.floor(diff/(1000*60*60*24))} DÍAS`;
+    }, 1000);
+  </script>
 </body>
 </html>
