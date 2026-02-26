@@ -5,97 +5,187 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boda Saga & Gise</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Montserrat:wght@300;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* DISEÑO PREMIUM CORREGIDO */
+    :root {
+      --boho-gold: #D4A373;
+      --boho-olive: #6B705C;
+      --boho-sand: #F5EBE0;
+      --boho-earth: #8D6E63;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--boho-sand);
+      font-family: 'Montserrat', sans-serif;
+      color: #333;
+    }
+
+    /* Imagen de Fondo */
+    .bg-image {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url('assets/images/portada-boho.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .rings-icon {
+      width: 80px;
+      margin-bottom: 20px;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--boho-earth);
+      margin: 10px 0;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      padding: 40px 25px;
+      border-radius: 50px 50px 20px 20px;
+      border: 1px solid white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .accordion {
+      background: white;
+      border: 1px solid var(--boho-gold);
+      border-radius: 15px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      padding: 15px;
+      cursor: pointer;
+      background: var(--boho-gold);
+      color: white;
+      font-weight: bold;
+    }
+
+    .accordion-content {
+      height: 0;
+      transition: 0.3s;
+      padding: 0 15px;
+      overflow: hidden;
+      font-size: 0.9rem;
+    }
+
+    .btn {
+      display: block; width: 100%;
+      padding: 15px; margin: 10px 0;
+      border-radius: 30px; border: none;
+      font-weight: bold; cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .btn-main { background: var(--boho-olive); color: white; }
+    .btn-sec { background: var(--boho-earth); color: white; opacity: 0.9; }
+
+    .dress-tag {
+      color: #a94442; font-weight: bold;
+      border: 1px solid #a94442;
+      padding: 5px; border-radius: 5px;
+      font-size: 0.8rem;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+  </style>
 </head>
 <body>
 
   <div class="bg-image"></div>
 
-  <section class="portada">
-    <img src="assets/images/anillos.png" alt="Anillos de boda Saga y Gise" class="rings-icon">
+  <section>
+    <img src="assets/images/anillos.png" alt="Anillos" class="rings-icon">
     <p style="letter-spacing: 4px;">NUESTRA BODA</p>
     <h1>Saga & Gise</h1>
-    <div id="countdown" style="font-size: 1.1rem; color: var(--boho-olive); font-weight: 500; margin: 25px 0;">FALTAN 0 DÍAS</div>
-    <p>30 de Mayo de 2026 - Salón MÁLAGA</p>
-    <p style="font-size: 2rem; animation: float 1.5s infinite;">↓</p>
+    <div id="countdown" style="font-weight: 600; color: var(--boho-olive);">Cargando...</div>
+    <p>30 de Mayo de 2026</p>
+    <p style="font-size: 2rem; animation: float 2s infinite;">↓</p>
   </section>
 
   <section>
     <div class="glass-card">
       <div class="accordion">
-        <div class="accordion-header" onclick="toggleAccordion('loc')"><span>📍 UBICACIÓN</span> <span>+</span></div>
+        <div class="accordion-header" onclick="toggle('loc')">📍 UBICACIÓN</div>
         <div id="loc" class="accordion-content">
-          <p><strong>Salón MALAGA</strong><br>Calle Ficticia 123<br>17:00hs - 30/05/2026</p>
-          <a href="https://maps.google.com" target="_blank" style="color:var(--boho-olive)">Ver en Google Maps</a>
+          <p><strong>Salón MALAGA</strong><br>Posadas, Misiones<br>17:00 hs</p>
+          <a href="https://maps.google.com" target="_blank" style="color:var(--boho-olive)">VER MAPA</a>
         </div>
       </div>
 
       <div class="accordion">
-        <div class="accordion-header" onclick="toggleAccordion('dress')"><span>👗 CÓDIGO DE VESTIMENTA</span> <span>+</span></div>
+        <div class="accordion-header" onclick="toggle('dress')">👗 DRESS CODE</div>
         <div id="dress" class="accordion-content">
           <p>Colores Tierra</p>
           <span class="dress-tag">🚫 PROHIBIDO BLANCO Y NEGRO</span>
         </div>
       </div>
-
-      <div class="accordion">
-        <div class="accordion-header" onclick="toggleAccordion('presente')"><span>🎁 REGALOS</span> <span>+</span></div>
-        <div id="presente" class="accordion-content">
-          <p>Tu presencia es lo más valioso. Si deseas tener un detalle, dispondremos de sobres para dejar efectivo en el salón.</p>
-        </div>
-      </div>
     </div>
   </section>
 
   <section>
     <div class="glass-card">
-      <h3>¿Vienes a celebrar?</h3>
-      <div id="confirmation-form">
-        <input type="text" id="guest-name" placeholder="Tu nombre y apellido" style="width:100%; padding:15px; margin-bottom:15px; border-radius:10px; border:1px solid var(--boho-gold); font-family: inherit;">
-        <button onclick="enviarRespuesta('Sí, confirmo')" class="btn btn-main">SÍ, ASISTIRÉ</button>
-        <button onclick="enviarRespuesta('Lo siento, no puedo')" class="btn btn-sec">NO PODRÉ IR</button>
+      <h3>¿Vienes?</h3>
+      <div id="form">
+        <input type="text" id="guest-name" placeholder="Tu nombre" style="width:100%; padding:12px; margin-bottom:10px; border-radius:10px; border:1px solid var(--boho-gold);">
+        <button onclick="enviar('Sí')" class="btn btn-main">SÍ, ASISTIRÉ</button>
+        <button onclick="enviar('No')" class="btn btn-sec">NO PODRÉ IR</button>
       </div>
-      <h4 id="form-status" style="margin-top:20px; color:var(--boho-olive);"></h4>
+      <p id="status"></p>
     </div>
   </section>
 
   <script>
-    // URL de tu Google Apps Script (Debe aceptar peticiones POST)
-    const GOOGLE_SCRIPT_API = "https://script.google.com/macros/s/AKfycby-qS8YrjDUa2CB0a_k4mpbbV_8JFIIk8FqWn6df1rxM1pyWfywQi8p8miuUxOw61Ot/exec";
+    const API = "https://script.google.com/macros/s/AKfycby-qS8YrjDUa2CB0a_k4mpbbV_8JFIIk8FqWn6df1rxM1pyWfywQi8p8miuUxOw61Ot/exec";
 
-    // Lógica para desplegar detalles
-    function toggleAccordion(id) {
-      const content = document.getElementById(id);
-      content.style.height = (content.style.height === '0px' || content.style.height === '') ? '110px' : '0px';
-      content.style.padding = (content.style.height === '110px') ? '20px' : '0';
+    function toggle(id) {
+      const el = document.getElementById(id);
+      el.style.height = (el.style.height === '0px' || el.style.height === '') ? '100px' : '0px';
+      el.style.padding = (el.style.height === '100px') ? '10px 15px' : '0 15px';
     }
 
-    // Cuenta Regresiva
-    const weddingDate = new Date("May 30, 2026 17:00:00").getTime();
+    const wedding = new Date("May 30, 2026 17:00:00").getTime();
     setInterval(() => {
-      const diff = weddingDate - new Date().getTime();
+      const diff = wedding - new Date().getTime();
       document.getElementById("countdown").innerText = `FALTAN ${Math.floor(diff/(1000*60*60*24))} DÍAS`;
     }, 1000);
 
-    // Envío de datos a Google Sheets
-    async function enviarRespuesta(status) {
+    async function enviar(res) {
       const name = document.getElementById('guest-name').value;
-      if(!name) return alert("Por favor ingresa tu nombre");
-      
-      document.getElementById('confirmation-form').style.display = 'none';
-      document.getElementById('form-status').innerText = "Enviando respuesta... ✨";
-
+      if(!name) return alert("Poné tu nombre");
+      document.getElementById('form').style.display = 'none';
+      document.getElementById('status').innerText = "Enviando...";
       try {
-        await fetch(GOOGLE_SCRIPT_API, {
-          method: 'POST',
-          mode: 'no-cors', 
-          body: JSON.stringify({nombre: name, confirmacion: status}),
-          headers: {'Content-Type': 'application/json'}
-        });
-        document.getElementById('form-status').innerText = "¡Gracias! Tu respuesta ha sido guardada.";
-      } catch (e) {
-        document.getElementById('form-status').innerText = "Hubo un error al enviar, intenta de nuevo.";
-        document.getElementById('confirmation-form').style.display = 'block';
+        await fetch(API, { method: 'POST', mode: 'no-cors', body: JSON.stringify({nombre: name, confirmacion: res}) });
+        document.getElementById('status').innerText = "¡Gracias! Respuesta guardada.";
+      } catch(e) { 
+        document.getElementById('status').innerText = "Error, intentá de nuevo.";
+        document.getElementById('form').style.display = 'block';
       }
     }
   </script>
