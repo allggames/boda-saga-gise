@@ -121,3 +121,70 @@ section {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
+
+
+:root {
+  --boho-gold: #D4A373;
+  --boho-olive: #6B705C;
+  --boho-sand: #F5EBE0;
+  --text: #4A4A4A;
+}
+
+body {
+  margin: 0;
+  background-color: var(--boho-sand);
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text);
+}
+
+/* Contenedor de cada 'Story' */
+section {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 450px; /* Tamaño de celular */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Tarjeta tipo Video */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 40px;
+  padding: 30px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border: 1px solid white;
+}
+
+/* Botones como los del video */
+.btn {
+  background: var(--boho-gold);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 10px 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Animación de los anillos */
+.rings-icon {
+  width: 60px;
+  animation: rotate 4s infinite linear;
+}
+
+@keyframes rotate {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
