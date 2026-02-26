@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Boda Saga & Gise</title>
+  <title>Saga & Gise</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Montserrat:wght@300;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -13,18 +13,18 @@
       --boho-earth: #8D6E63;
     }
 
-    * { box-sizing: border-box; }
-
+    /* Efecto Snap Scroll tipo Historias */
     html, body {
       margin: 0; padding: 0;
-      background-color: var(--boho-sand);
-      font-family: 'Montserrat', sans-serif;
-      scroll-snap-type: y mandatory; /* Efecto de cartas que 'traban' al bajar */
+      scroll-snap-type: y mandatory;
       overflow-y: scroll;
       height: 100vh;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--boho-sand);
+      color: #333;
     }
 
-    /* Imagen de fondo fija que cambia opacidad */
+    /* Fondo Fijo que recupera tu imagen */
     .bg-fixed {
       position: fixed;
       top: 0; left: 0;
@@ -34,7 +34,7 @@
       background-position: center;
       z-index: -1;
       opacity: 0.5;
-      transition: opacity 0.8s ease;
+      transition: opacity 1s ease;
     }
 
     section {
@@ -48,32 +48,25 @@
       position: relative;
     }
 
-    /* Diseño de las cartas (Glassmorphism) */
+    /* Carta estilo Story del video */
     .glass-card {
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
-      padding: 45px 25px;
-      border-radius: 80px 80px 20px 20px;
+      padding: 40px 25px;
+      border-radius: 60px 60px 20px 20px;
       border: 1px solid rgba(255,255,255,0.5);
       box-shadow: 0 15px 35px rgba(0,0,0,0.1);
       width: 100%;
-      max-width: 360px;
+      max-width: 350px;
       text-align: center;
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
     }
 
     section.active .glass-card {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    /* Detalles Boho: Pampas (Plumas) */
-    .pampas-decor {
-      width: 120px;
-      margin-bottom: 10px;
-      opacity: 0.7;
     }
 
     h1 {
@@ -84,7 +77,7 @@
     }
 
     .rings-icon {
-      width: 65px;
+      width: 70px;
       margin-bottom: 20px;
       animation: rotate 4s infinite linear;
     }
@@ -94,23 +87,22 @@
       to { transform: rotateY(360deg); }
     }
 
-    /* Acordeón de detalles */
+    /* Acordeón para detalles */
     .accordion {
       background: white;
       border-radius: 20px;
-      margin: 12px 0;
+      margin: 10px 0;
       width: 100%;
       overflow: hidden;
       border: 1px solid var(--boho-gold);
     }
 
     .accordion-header {
-      padding: 16px;
+      padding: 15px;
       cursor: pointer;
       background: var(--boho-gold);
       color: white;
       font-weight: bold;
-      font-size: 0.9rem;
     }
 
     .accordion-content {
@@ -123,25 +115,24 @@
 
     .btn {
       display: block; width: 100%;
-      padding: 16px; margin: 10px 0;
-      border-radius: 35px; border: none;
+      padding: 15px; margin: 10px 0;
+      border-radius: 30px; border: none;
       font-weight: bold; cursor: pointer;
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
     .btn-olive { background: var(--boho-olive); color: white; }
     .btn-earth { background: var(--boho-earth); color: white; opacity: 0.9; }
 
-    .scroll-indicator {
+    .arrow {
       position: absolute; bottom: 30px;
-      font-size: 1.8rem; color: var(--boho-gold);
+      font-size: 2rem; color: var(--boho-gold);
       animation: bounce 2s infinite;
     }
 
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-      40% {transform: translateY(-10px);}
+      40% {transform: translateY(-15px);}
     }
   </style>
 </head>
@@ -151,13 +142,13 @@
 
   <section class="active">
     <div class="glass-card" style="opacity: 1; transform: none;">
-      <p style="letter-spacing: 5px; font-size: 0.7rem; color: var(--boho-olive);">NUESTRA BODA</p>
-      <h1>Saga & Gise</h1>
       <img src="assets/images/anillos.png" alt="Anillos" class="rings-icon">
-      <div id="countdown" style="font-weight: 600; color: var(--boho-earth); margin-bottom: 10px;">FALTAN...</div>
+      <p style="letter-spacing: 5px; font-size: 0.7rem;">NUESTRA BODA</p>
+      <h1>Saga & Gise</h1>
+      <div id="countdown" style="font-weight: 600; color: var(--boho-olive); margin: 15px 0;">FALTAN...</div>
       <p>30 DE MAYO DE 2026</p>
     </div>
-    <div class="scroll-indicator">↓</div>
+    <div class="arrow">↓</div>
   </section>
 
   <section>
@@ -165,8 +156,8 @@
       <div class="accordion">
         <div class="accordion-header" onclick="toggle('loc')">📍 UBICACIÓN</div>
         <div id="loc" class="accordion-content">
-          <p><strong>Salón MALAGA</strong><br>Posadas, Misiones<br>17:00 hs</p>
-          <a href="https://maps.google.com" target="_blank" class="btn btn-olive" style="font-size: 0.7rem; text-decoration: none;">VER MAPA</a>
+          <p><strong>Salón MALAGA</strong><br>30/05/2026 - 17:00 hs</p>
+          <a href="https://maps.google.com" target="_blank" class="btn btn-olive" style="text-decoration:none; font-size: 0.7rem;">VER MAPA</a>
         </div>
       </div>
 
@@ -174,47 +165,44 @@
         <div class="accordion-header" onclick="toggle('dress')">👗 DRESS CODE</div>
         <div id="dress" class="accordion-content">
           <p>Colores Tierra</p>
-          <p style="color: #a94442; font-weight: bold; border: 1px dashed; padding: 10px; border-radius: 10px;">🚫 PROHIBIDO BLANCO Y NEGRO</p>
+          <p style="color: #a94442; font-weight: bold; border: 1px dashed; padding: 8px; border-radius: 10px;">🚫 PROHIBIDO BLANCO Y NEGRO</p>
         </div>
       </div>
     </div>
-    <div class="scroll-indicator">↓</div>
+    <div class="arrow">↓</div>
   </section>
 
   <section>
     <div class="glass-card">
-      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem;">¿Nos acompañas?</h3>
+      <h3 style="font-family: 'Playfair Display', serif;">¿Vienes?</h3>
       <div id="form">
-        <input type="text" id="nombre" placeholder="Tu nombre completo" style="width:100%; padding:15px; margin-bottom:15px; border-radius:15px; border:1px solid var(--boho-gold); font-family: inherit;">
+        <input type="text" id="nombre" placeholder="Tu nombre y apellido" style="width:100%; padding:15px; margin-bottom:15px; border-radius:15px; border:1px solid var(--boho-gold); font-family: inherit;">
         <button onclick="enviar('Sí')" class="btn btn-olive">SÍ, ASISTIRÉ</button>
         <button onclick="enviar('No')" class="btn btn-earth">NO PODRÉ IR</button>
       </div>
-      <p id="status" style="font-weight: bold; color: var(--boho-olive); margin-top: 15px;"></p>
-      
-      <div style="margin-top: 30px; font-size: 0.8rem; border-top: 1px solid #eee; padding-top: 20px; color: var(--boho-earth);">
-        🎁 <strong>REGALOS:</strong> Se dispondrá de sobres para dejar efectivo en el salón.
+      <p id="status" style="font-weight: bold; color: var(--boho-olive);"></p>
+      <div style="margin-top: 25px; font-size: 0.75rem; color: var(--boho-earth);">
+        🎁 <strong>Regalos:</strong> Habrá sobres para efectivo en el salón.
       </div>
     </div>
   </section>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycby-qS8YrjDUa2CB0a_k4mpbbV_8JFIIk8FqWn6df1rxM1pyWfywQi8p8miuUxOw61Ot/exec";
+    const API = "https://script.google.com/macros/s/AKfycby-qS8YrjDUa2CB0a_k4mpbbV_8JFIIk8FqWn6df1rxM1pyWfywQi8p8miuUxOw61Ot/exec";
 
     function toggle(id) {
       const el = document.getElementById(id);
-      const isOpen = el.style.height === '140px';
-      el.style.height = isOpen ? '0px' : '140px';
+      const isOpen = el.style.height === '130px';
+      el.style.height = isOpen ? '0px' : '130px';
       el.style.padding = isOpen ? '0 20px' : '20px';
     }
 
-    const weddingDate = new Date("May 30, 2026 17:00:00").getTime();
+    const wedding = new Date("May 30, 2026 17:00:00").getTime();
     setInterval(() => {
-      const diff = weddingDate - new Date().getTime();
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const days = Math.floor((wedding - new Date().getTime()) / (1000 * 60 * 60 * 24));
       document.getElementById("countdown").innerText = `FALTAN ${days} DÍAS`;
     }, 1000);
 
-    // Detección de scroll para efectos de video
     const bg = document.getElementById('bg');
     window.addEventListener('scroll', () => {
       const sections = document.querySelectorAll('section');
@@ -222,7 +210,6 @@
         const rect = sec.getBoundingClientRect();
         if(rect.top >= 0 && rect.top < window.innerHeight / 2) {
           sec.classList.add('active');
-          // El fondo cambia de opacidad según la sección
           if(i === 1) bg.style.opacity = "0.2"; 
           else bg.style.opacity = "0.5";
         } else {
@@ -233,12 +220,12 @@
 
     async function enviar(res) {
       const name = document.getElementById('nombre').value;
-      if(!name) return alert("Por favor, ingresa tu nombre");
+      if(!name) return alert("Dinos tu nombre");
       document.getElementById('form').style.display = 'none';
-      document.getElementById('status').innerText = "Enviando respuesta... ✨";
+      document.getElementById('status').innerText = "Enviando... ✨";
       try {
-        await fetch(API_URL, {method: 'POST', mode: 'no-cors', body: JSON.stringify({nombre: name, confirmacion: res})});
-        document.getElementById('status').innerText = "¡Gracias! Tu respuesta ha sido guardada.";
+        await fetch(API, {method: 'POST', mode: 'no-cors', body: JSON.stringify({nombre: name, confirmacion: res})});
+        document.getElementById('status').innerText = "¡Gracias! Respuesta guardada.";
       } catch(e) { 
         document.getElementById('status').innerText = "Error, intenta de nuevo.";
         document.getElementById('form').style.display = 'block';
