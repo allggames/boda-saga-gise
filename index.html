@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Saga & Gise</title>
+  <title>Boda Saga & Gise</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Montserrat:wght@300;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -13,28 +13,25 @@
       --boho-earth: #8D6E63;
     }
 
-    /* Reset y Snap Scroll */
     html, body {
       margin: 0; padding: 0;
       scroll-snap-type: y mandatory;
       overflow-y: scroll;
       height: 100vh;
       font-family: 'Montserrat', sans-serif;
-      background-color: #000; /* Fondo base oscuro por si falla la imagen */
+      background-color: var(--boho-sand); /* Cambiado de negro a arena */
     }
 
-    /* LA IMAGEN EN EL FONDO (FIJA Y TOTAL) */
+    /* EL FONDO (Asegúrate que la imagen esté en assets/images/portada-boho.jpg) */
     .background-fijo {
       position: fixed;
       top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-image: url('assets/images/portada-boho.jpg'); /* RUTA AL FONDO */
+      width: 100vw; height: 100vh;
+      background-image: url('assets/images/portada-boho.jpg');
       background-size: cover;
       background-position: center;
-      z-index: -1; /* Va detrás de todo */
-      opacity: 0.6; /* Opacidad estilo video */
-      transition: opacity 0.8s ease;
+      z-index: -1;
+      opacity: 0.6;
     }
 
     section {
@@ -46,23 +43,20 @@
       align-items: center;
       padding: 20px;
       scroll-snap-align: start;
-      position: relative;
     }
 
-    /* Carta estilo Story que flota sobre el fondo */
+    /* Cartas blancas sólidas para que se vean siempre */
     .carta-story {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(10px);
+      background: white; /* Blanco sólido para evitar el efecto negro */
       padding: 40px 25px;
       border-radius: 60px 60px 20px 20px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
       width: 100%;
       max-width: 350px;
       text-align: center;
       opacity: 0;
-      transform: translateY(50px);
-      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
     }
 
     section.active .carta-story {
@@ -72,12 +66,12 @@
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3rem;
+      font-size: 2.8rem;
       color: var(--boho-earth);
       margin: 10px 0;
     }
 
-    .anillos-gif {
+    .anillos-img {
       width: 70px;
       margin-bottom: 20px;
       animation: girar 4s infinite linear;
@@ -88,14 +82,14 @@
       to { transform: rotateY(360deg); }
     }
 
-    /* Acordeón */
+    /* DESPLEGABLES CORREGIDOS */
     .acordeon {
-      background: white;
+      background: #fdfdfd;
       border-radius: 20px;
-      margin: 10px 0;
+      margin: 12px 0;
       width: 100%;
-      overflow: hidden;
       border: 1px solid var(--boho-gold);
+      overflow: hidden;
     }
 
     .acordeon-header {
@@ -104,12 +98,11 @@
       background: var(--boho-gold);
       color: white;
       font-weight: bold;
-      font-size: 0.9rem;
     }
 
     .acordeon-content {
-      height: 0;
-      transition: 0.4s;
+      max-height: 0; /* Cambiado para mejor funcionamiento */
+      transition: max-height 0.4s ease-out;
       padding: 0 20px;
       overflow: hidden;
       font-size: 0.85rem;
@@ -117,12 +110,11 @@
 
     .boton-boho {
       display: block; width: 100%;
-      padding: 16px; margin: 10px 0;
-      border-radius: 35px; border: none;
-      font-weight: bold; cursor: pointer;
+      padding: 15px; margin: 10px 0;
+      border-radius: 30px; border: none;
+      font-weight: bold; color: white;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: white;
+      text-decoration: none;
     }
 
     .verde { background: var(--boho-olive); }
@@ -130,26 +122,26 @@
 
     .flecha {
       position: absolute; bottom: 30px;
-      font-size: 2rem; color: #fff;
+      font-size: 2rem; color: var(--boho-gold);
       animation: saltar 2s infinite;
     }
 
     @keyframes saltar {
       0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-      40% {transform: translateY(-15px);}
+      40% {transform: translateY(-10px);}
     }
   </style>
 </head>
 <body>
 
-  <div class="background-fijo" id="bgBody"></div>
+  <div class="background-fijo"></div>
 
   <section class="active">
     <div class="carta-story" style="opacity: 1; transform: none;">
       <p style="letter-spacing: 5px; font-size: 0.7rem; color: var(--boho-olive);">NUESTRA BODA</p>
       <h1>Saga & Gise</h1>
-      <img src="assets/images/anillos.png" alt="Anillos" class="anillos-gif">
-      <div id="countdown" style="font-weight: 600; color: var(--boho-earth); margin-bottom: 10px;">FALTAN...</div>
+      <img src="assets/images/anillos.png" alt="Anillos" class="anillos-img">
+      <div id="countdown" style="font-weight: 600; color: var(--boho-earth);">FALTAN...</div>
       <p>30 DE MAYO DE 2026</p>
     </div>
     <div class="flecha">↓</div>
@@ -160,8 +152,8 @@
       <div class="acordeon">
         <div class="acordeon-header" onclick="ver('loc')">📍 UBICACIÓN</div>
         <div id="loc" class="acordeon-content">
-          <p><strong>Salón MALAGA</strong><br>30/05/2026 - 17:00 hs</p>
-          <a href="https://maps.google.com" target="_blank" class="boton-boho verde" style="text-decoration:none; font-size: 0.7rem;">CÓMO LLEGAR</a>
+          <p><strong>Salón MALAGA</strong><br>Posadas, Misiones<br>17:00 hs</p>
+          <a href="https://maps.google.com" target="_blank" class="boton-boho verde" style="font-size: 0.7rem;">CÓMO LLEGAR</a>
         </div>
       </div>
 
@@ -179,15 +171,12 @@
   <section>
     <div class="carta-story">
       <h3>¿Vienes?</h3>
-      <div id="confirm-form">
-        <input type="text" id="nombreGuest" placeholder="Tu nombre completo" style="width:100%; padding:15px; margin-bottom:15px; border-radius:15px; border:1px solid var(--boho-gold);">
-        <button onclick="enviarSheet('Sí')" class="boton-boho verde">SÍ, ASISTIRÉ</button>
-        <button onclick="enviarSheet('No')" class="boton-boho tierra">NO PODRÉ IR</button>
+      <div id="form-box">
+        <input type="text" id="nombreG" placeholder="Tu nombre completo" style="width:100%; padding:15px; margin-bottom:15px; border-radius:15px; border:1px solid var(--boho-gold);">
+        <button onclick="enviar('Sí')" class="boton-boho verde">SÍ, ASISTIRÉ</button>
+        <button onclick="enviar('No')" class="boton-boho tierra">NO PODRÉ IR</button>
       </div>
-      <p id="msgStatus" style="font-weight: bold; color: var(--boho-olive);"></p>
-      <div style="margin-top: 30px; font-size: 0.8rem; border-top: 1px solid #eee; padding-top: 20px;">
-        🎁 <strong>REGALOS:</strong> Sobres para efectivo en el salón.
-      </div>
+      <p id="status"></p>
     </div>
   </section>
 
@@ -196,42 +185,42 @@
 
     function ver(id) {
       const el = document.getElementById(id);
-      const open = el.style.height === '130px';
-      el.style.height = open ? '0px' : '130px';
-      el.style.padding = open ? '0 20px' : '20px';
+      if (el.style.maxHeight) {
+        el.style.maxHeight = null;
+        el.style.padding = "0 20px";
+      } else {
+        el.style.maxHeight = "200px";
+        el.style.padding = "20px";
+      }
     }
 
-    const fin = new Date("May 30, 2026 17:00:00").getTime();
+    const wedding = new Date("May 30, 2026 17:00:00").getTime();
     setInterval(() => {
-      const d = Math.floor((fin - new Date().getTime()) / (1000 * 60 * 60 * 24));
+      const d = Math.floor((wedding - new Date().getTime()) / (1000 * 60 * 60 * 24));
       document.getElementById("countdown").innerText = `FALTAN ${d} DÍAS`;
     }, 1000);
 
-    const bg = document.getElementById('bgBody');
+    // Animación de cartas al hacer scroll
     window.addEventListener('scroll', () => {
       const secs = document.querySelectorAll('section');
-      secs.forEach((s, i) => {
+      secs.forEach((s) => {
         const top = s.getBoundingClientRect().top;
-        if(top >= 0 && top < window.innerHeight / 2) {
-          s.classList.add('active');
-          bg.style.opacity = (i === 1) ? "0.3" : "0.6"; /* Cambia fondo según sección */
-        } else {
-          s.classList.remove('active');
-        }
+        if(top >= 0 && top < window.innerHeight / 2) s.classList.add('active');
+        else s.classList.remove('active');
       });
     });
 
-    async function enviarSheet(res) {
-      const n = document.getElementById('nombreGuest').value;
+    async function enviar(res) {
+      const n = document.getElementById('nombreG').value;
       if(!n) return alert("Ingresa tu nombre");
-      document.getElementById('confirm-form').style.display = 'none';
-      document.getElementById('msgStatus').innerText = "Guardando... ✨";
+      document.getElementById('form-box').style.display = 'none';
+      document.getElementById('status').innerText = "Guardando... ✨";
       try {
         await fetch(GOOGLE_API, {method: 'POST', mode: 'no-cors', body: JSON.stringify({nombre: n, confirmacion: res})});
-        document.getElementById('msgStatus').innerText = "¡Gracias! Tu respuesta fue guardada.";
+        document.getElementById('status').innerText = "¡Gracias! Tu respuesta fue guardada.";
       } catch(e) { 
-        document.getElementById('msgStatus').innerText = "Error, intenta de nuevo.";
-        document.getElementById('confirm-form').style.display = 'block';
+        document.getElementById('status').innerText = "Error, intenta de nuevo.";
+        document.getElementById('form-box').style.display = 'block';
       }
     }
   </script>
